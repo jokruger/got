@@ -38,6 +38,12 @@ func TestSet(t *testing.T) {
 		if s.ContainsAll(2, 4) {
 			t.Error("Set should not contain 4")
 		}
+		if !s.ContainsAny(2, 4) {
+			t.Error("Set should contain 2")
+		}
+		if s.ContainsAny(4, 5) {
+			t.Error("Set should not contain 4 or 5")
+		}
 
 		s = NewSet[int]()
 		s.Add(1, 2, 3)

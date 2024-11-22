@@ -135,6 +135,11 @@ func (s Set[T]) ContainsAll(es ...T) bool
 ```
 ContainsAll returns true if the set contains all the elements.
 
+```go
+func (s Set[T]) ContainsAny(es ...T) bool
+```
+ContainsAny returns true if the set contains any of the elements.
+
 
 ## Other
 
