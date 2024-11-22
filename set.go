@@ -47,3 +47,13 @@ func (s Set[T]) Contains(e T) bool {
 	_, ok := s[e]
 	return ok
 }
+
+// ContainsAll returns true if the set contains all the elements.
+func (s Set[T]) ContainsAll(es ...T) bool {
+	for _, e := range es {
+		if !s.Contains(e) {
+			return false
+		}
+	}
+	return true
+}
