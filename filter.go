@@ -23,3 +23,17 @@ func FilterIter[T any](is iter.Seq[T], f func(T) bool) []T {
 	}
 	return js
 }
+
+// FilterSet returns a new slice containing only the elements of slice 'is' that are in set 's'.
+func FilterSet[T comparable](is []T, s Set[T]) []T {
+	return Filter(is, func(i T) bool {
+		return s.Contains(i)
+	})
+}
+
+// FilterSetIter returns a new slice containing only the elements of sequence 'is' that are in set 's'.
+func FilterSetIter[T comparable](is iter.Seq[T], s Set[T]) []T {
+	return FilterIter(is, func(i T) bool {
+		return s.Contains(i)
+	})
+}
