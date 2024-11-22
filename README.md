@@ -101,9 +101,9 @@ Range returns a slice of integers from 0 to n-1.
 Set is a set of elements of type T.
 
 ```go
-func NewSet[T comparable]() Set[T]
+func NewSet[T comparable](src ...Set[T]) Set[T]
 ```
-NewSet creates a new set.
+NewSet creates a new set. The set can be initialized with other sets.
 
 ```go
 func NewSetFromSlice[T comparable](s []T) Set[T]
@@ -116,9 +116,29 @@ func NewSetFromIter[T comparable](is iter.Seq[T]) Set[T]
 NewSetFromIter creates a new set from an iterator.
 
 ```go
+func (s Set[T]) Len() int
+```
+Len returns the number of elements in the set.
+
+```go
 func (s Set[T]) Add(es ...T)
 ```
 Add adds elements to the set.
+
+```go
+func (s Set[T]) AddIter(is iter.Seq[T])
+```
+AddIter adds elements to the set from an iterator.
+
+```go
+func (s Set[T]) AddSet(other Set[T])
+```
+AddSet adds elements to the set from another set.
+
+```go
+func (s Set[T]) AddSlice(es []T)
+```
+AddSlice adds elements to the set from a slice.
 
 ```go
 func (s Set[T]) Remove(es ...T)
@@ -139,6 +159,16 @@ ContainsAll returns true if the set contains all the elements.
 func (s Set[T]) ContainsAny(es ...T) bool
 ```
 ContainsAny returns true if the set contains any of the elements.
+
+```go
+func (s Set[T]) Slice() []T 
+```
+Slice returns the elements of the set as a slice.
+
+```go
+func (s Set[T]) Iter() iter.Seq[T]
+```
+Iter returns an iterator over the elements of the set.
 
 
 ## Other
