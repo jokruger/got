@@ -116,14 +116,14 @@ func NewSetFromIter[T comparable](is iter.Seq[T]) Set[T]
 NewSetFromIter creates a new set from an iterator.
 
 ```go
-func (s Set[T]) Add(e T)
+func (s Set[T]) Add(es ...T)
 ```
-Add adds an element to the set.
+Add adds elements to the set.
 
 ```go
-func (s Set[T]) Remove(e T)
+func (s Set[T]) Remove(es ...T)
 ```
-Remove removes an element from the set.
+Remove removes elements from the set.
 
 ```go
 func (s Set[T]) Contains(e T) bool

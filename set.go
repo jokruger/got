@@ -28,14 +28,18 @@ func NewSetFromIter[T comparable](is iter.Seq[T]) Set[T] {
 	return set
 }
 
-// Add adds an element to the set.
-func (s Set[T]) Add(e T) {
-	s[e] = nil
+// Add adds elements to the set.
+func (s Set[T]) Add(es ...T) {
+	for _, e := range es {
+		s[e] = nil
+	}
 }
 
-// Remove removes an element from the set.
-func (s Set[T]) Remove(e T) {
-	delete(s, e)
+// Remove removes elements from the set.
+func (s Set[T]) Remove(es ...T) {
+	for _, e := range es {
+		delete(s, e)
+	}
 }
 
 // Contains returns true if the set contains the element.
