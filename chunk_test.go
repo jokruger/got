@@ -2,37 +2,37 @@ package got
 
 import "testing"
 
-func TestGoInBatches(t *testing.T) {
-	t.Run("GoInBatches1", func(t *testing.T) {
+func TestGoInChunks(t *testing.T) {
+	t.Run("GoInChunks1", func(t *testing.T) {
 		tasks := Range(999)
-		batches := make([][]int, 0)
+		chunks := make([][]int, 0)
 		res := make([]int, 0)
 
-		if err := GoInBatches(tasks, 100, func(batch []int) error {
-			batches = append(batches, batch)
+		if err := GoInChunks(tasks, 100, func(chunk []int) error {
+			chunks = append(chunks, chunk)
 			return nil
 		}); err != nil {
 			t.Errorf("Error: %s", err.Error())
 		}
 
-		if len(batches) != 10 {
-			t.Errorf("Expected 10 batches, got %d", len(batches))
+		if len(chunks) != 10 {
+			t.Errorf("Expected 10 chunks, got %d", len(chunks))
 		}
 
-		if len(batches[0]) != 100 {
-			t.Errorf("Expected 100 items in first batch, got %d", len(batches[0]))
+		if len(chunks[0]) != 100 {
+			t.Errorf("Expected 100 items in first chunk, got %d", len(chunks[0]))
 		}
 
-		if len(batches[9]) != 99 {
-			t.Errorf("Expected 99 items in last batch, got %d", len(batches[9]))
+		if len(chunks[9]) != 99 {
+			t.Errorf("Expected 99 items in last chunk, got %d", len(chunks[9]))
 		}
 
-		for _, batch := range batches {
-			res = append(res, batch...)
+		for _, chunk := range chunks {
+			res = append(res, chunk...)
 		}
 
 		if len(res) != 999 {
-			t.Errorf("Expected 1000 items in all batches, got %d", len(res))
+			t.Errorf("Expected 1000 items in all chunks, got %d", len(res))
 		}
 
 		for i := 0; i < 999; i++ {
@@ -42,13 +42,13 @@ func TestGoInBatches(t *testing.T) {
 		}
 	})
 
-	t.Run("GoInBatches2", func(t *testing.T) {
+	t.Run("GoInChunks2", func(t *testing.T) {
 		tasks := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
 		sums := make([]int, 0)
 
-		if err := GoInBatches(tasks, 3, func(batch []int) error {
+		if err := GoInChunks(tasks, 3, func(chunk []int) error {
 			sum := 0
-			for _, t := range batch {
+			for _, t := range chunk {
 				sum += t
 			}
 			sums = append(sums, sum)

@@ -8,19 +8,19 @@ go get github.com/jokruger/got
 ```
 
 
-## Batches
+## Chunks
 
-### func Batches
+### func Chunks
 ```go
-func Batches[T any](tasks []T, batchSize int) iter.Seq[[]T]
+func Chunks[T any](ts []T, size int) iter.Seq[[]T]
 ```
-Batches returns an iterator that yields batches of tasks.
+Chunks returns a sequence of chunks of the input slice, each of given size at most.
 
-### func GoInBatches
+### func GoInChunks
 ```go
-func GoInBatches[T any](tasks []T, batchSize int, f func([]T) error) error
+func GoInChunks[T any](ts []T, size int, f func([]T) error) error
 ```
-GoInBatches runs a function in batches of tasks.
+GoInChunks calls the given function for each chunk of the input slice, each of given size at most.
 
 
 ## Filters
