@@ -1,5 +1,7 @@
 package got
 
+import "iter"
+
 // Set is a set of elements of type T.
 type Set[T comparable] map[T]interface{}
 
@@ -12,6 +14,15 @@ func NewSet[T comparable]() Set[T] {
 func NewSetFromSlice[T comparable](s []T) Set[T] {
 	set := make(Set[T])
 	for _, e := range s {
+		set[e] = nil
+	}
+	return set
+}
+
+// NewSetFromIter creates a new set from an iterator.
+func NewSetFromIter[T comparable](is iter.Seq[T]) Set[T] {
+	set := make(Set[T])
+	for e := range is {
 		set[e] = nil
 	}
 	return set

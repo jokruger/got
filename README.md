@@ -94,6 +94,16 @@ func NewSet[T comparable]() Set[T]
 NewSet creates a new set.
 
 ```go
+func NewSetFromSlice[T comparable](s []T) Set[T]
+```
+NewSetFromSlice creates a new set from a slice.
+
+```go
+func NewSetFromIter[T comparable](is iter.Seq[T]) Set[T]
+```
+NewSetFromIter creates a new set from an iterator.
+
+```go
 func (s Set[T]) Add(e T)
 ```
 Add adds an element to the set.
