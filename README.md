@@ -83,6 +83,32 @@ func Range(n int) []int
 Range returns a slice of integers from 0 to n-1.
 
 
+## Sets
+
+### type Set
+Set is a set of elements of type T.
+
+```go
+func NewSet[T comparable]() Set[T]
+```
+NewSet creates a new set.
+
+```go
+func (s Set[T]) Add(e T)
+```
+Add adds an element to the set.
+
+```go
+func (s Set[T]) Remove(e T)
+```
+Remove removes an element from the set.
+
+```go
+func (s Set[T]) Contains(e T) bool
+```
+Contains returns true if the set contains the element.
+
+
 ## Other
 
 ### func Choose
