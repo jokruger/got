@@ -2,38 +2,24 @@ package got
 
 import "iter"
 
-// Filter returns a new slice containing only the elements of slice 'is' that satisfy the predicate f.
-func Filter[T any](is []T, f func(T) bool) []T {
-	var js []T
-	for _, v := range is {
+// Filter returns a new slice containing only the elements of slice 's' that satisfy the predicate f.
+func Filter[T any](s []T, f func(T) bool) []T {
+	res := make([]T, 0, len(s))
+	for _, v := range s {
 		if f(v) {
-			js = append(js, v)
+			res = append(res, v)
 		}
 	}
-	return js
+	return res
 }
 
-// FilterIter returns a new slice containing only the elements of sequence 'is' that satisfy the predicate f.
-func FilterIter[T any](is iter.Seq[T], f func(T) bool) []T {
-	var js []T
-	for i := range is {
+// FilterSeq returns a new slice containing only the elements of sequence 's' that satisfy the predicate f.
+func FilterSeq[T any](s iter.Seq[T], f func(T) bool) []T {
+	var res []T
+	for i := range s {
 		if f(i) {
-			js = append(js, i)
+			res = append(res, i)
 		}
 	}
-	return js
-}
-
-// FilterSet returns a new slice containing only the elements of slice 'is' that are in set 's'.
-func FilterSet[T comparable](is []T, s Set[T]) []T {
-	return Filter(is, func(i T) bool {
-		return s.Contains(i)
-	})
-}
-
-// FilterSetIter returns a new slice containing only the elements of sequence 'is' that are in set 's'.
-func FilterSetIter[T comparable](is iter.Seq[T], s Set[T]) []T {
-	return FilterIter(is, func(i T) bool {
-		return s.Contains(i)
-	})
+	return res
 }

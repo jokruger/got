@@ -15,13 +15,13 @@ func TestFilter(t *testing.T) {
 	})
 
 	t.Run("FilterSet strings", func(t *testing.T) {
-		s := []string{"a", "b", "c", "d", "e"}
-		r := FilterSet(s, NewSetFromSlice([]string{"b", "d"}))
+		s := []string{"a", "b", "c", "d", "e", "a"}
+		r := Filter(s, func(i string) bool { return i == "a" })
 		if len(r) != 2 {
 			t.Errorf("Expected 2, got %d", len(r))
 		}
-		if r[0] != "b" || r[1] != "d" {
-			t.Errorf("Expected [b, d], got %v", r)
+		if r[0] != "a" || r[1] != "a" {
+			t.Errorf("Expected [a, a], got %v", r)
 		}
 	})
 }

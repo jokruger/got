@@ -1,5 +1,5 @@
 # Overview
-Package GOT implements frequently used functions and algorights.
+Package GOT implements frequently used functions and algorithms.
 
 ## Installation
 
