@@ -35,6 +35,20 @@ func TestMap(t *testing.T) {
 			t.Errorf("Expected [a, b, c], got %v", r2)
 		}
 	})
+
+	t.Run("MapToSeq ints", func(t *testing.T) {
+		s := []int{1, 2, 3, 4, 5}
+		res := []int{}
+		for r := range MapToSeq(s, func(i int) int { return i * 2 }) {
+			res = append(res, r)
+		}
+		if len(res) != 5 {
+			t.Errorf("Expected 5, got %d", len(res))
+		}
+		if res[0] != 2 || res[1] != 4 || res[2] != 6 || res[3] != 8 || res[4] != 10 {
+			t.Errorf("Expected [2, 4, 6, 8, 10], got %v", res)
+		}
+	})
 }
 
 func TestMapUnique(t *testing.T) {

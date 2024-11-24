@@ -24,4 +24,18 @@ func TestFilter(t *testing.T) {
 			t.Errorf("Expected [a, a], got %v", r)
 		}
 	})
+
+	t.Run("FilterToSeq ints", func(t *testing.T) {
+		s := []int{1, 2, 3, 4, 5}
+		var res []int
+		for r := range FilterToSeq(s, func(i int) bool { return i%2 == 0 }) {
+			res = append(res, r)
+		}
+		if len(res) != 2 {
+			t.Errorf("Expected 2, got %d", len(res))
+		}
+		if res[0] != 2 || res[1] != 4 {
+			t.Errorf("Expected [2, 4], got %v", res)
+		}
+	})
 }

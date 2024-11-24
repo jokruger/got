@@ -29,13 +29,6 @@ func Or[T any](f, g func(T) bool) func(T) bool {
 	}
 }
 
-// InContainer returns a predicate that checks if a value is in generic container.
-func InContainer[T comparable](c Container[T]) func(T) bool {
-	return func(v T) bool {
-		return c.Contains(v)
-	}
-}
-
 // InSet returns a predicate that checks if a value is in a set.
 func InSet[T comparable](s set.Set[T]) func(T) bool {
 	return func(v T) bool {
@@ -161,4 +154,8 @@ func MatchesRegexpCompiled(re *regexp.Regexp) func(string) bool {
 	return func(s string) bool {
 		return re.MatchString(s)
 	}
+}
+
+func Equal[T comparable](a, b T) bool {
+	return a == b
 }

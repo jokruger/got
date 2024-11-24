@@ -74,7 +74,7 @@ func TestSet(t *testing.T) {
 		}
 
 		s = set.New[int]()
-		s.Add(1, 2, 3)
+		s.AddMany(1, 2, 3)
 		if !s.Contains(1) {
 			t.Error("Set should contain 1")
 		}
@@ -130,7 +130,7 @@ func TestSet(t *testing.T) {
 
 	t.Run("Set of ints add", func(t *testing.T) {
 		s := set.New[int]()
-		s.Add(1, 2, 3)
+		s.AddMany(1, 2, 3)
 		if !s.Contains(1) {
 			t.Error("Set should contain 1")
 		}
@@ -181,7 +181,7 @@ func TestSet(t *testing.T) {
 
 	t.Run("Set of ints remove", func(t *testing.T) {
 		s := set.New(1, 2, 3, 4, 5, 6, 7, 9)
-		s.Remove(1, 2)
+		s.RemoveMany(1, 2)
 		if s.Contains(1) {
 			t.Error("Set should not contain 1")
 		}

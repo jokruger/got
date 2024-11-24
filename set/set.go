@@ -78,8 +78,17 @@ func (s Set[T]) Equal(other Set[T]) bool {
 	return true
 }
 
-// Add adds the elements to the set.
-func (s Set[T]) Add(elements ...T) {
+// Add adds the element to the set. Returns true if the element was added. Returns false if the element was already in the set.
+func (s Set[T]) Add(element T) bool {
+	if _, ok := s[element]; ok {
+		return false
+	}
+	s[element] = nil
+	return true
+}
+
+// AddMany adds the elements to the set.
+func (s Set[T]) AddMany(elements ...T) {
 	for _, e := range elements {
 		s[e] = nil
 	}
@@ -106,8 +115,17 @@ func (s Set[T]) AddSet(source Set[T]) {
 	}
 }
 
-// Remove removes the elements from the set.
-func (s Set[T]) Remove(elements ...T) {
+// Remove removes the element from the set. Returns true if the element was removed. Returns false if the element was not in the set.
+func (s Set[T]) Remove(element T) bool {
+	if _, ok := s[element]; !ok {
+		return false
+	}
+	delete(s, element)
+	return true
+}
+
+// RemoveMany removes the elements from the set.
+func (s Set[T]) RemoveMany(elements ...T) {
 	for _, e := range elements {
 		delete(s, e)
 	}
