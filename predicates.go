@@ -156,6 +156,13 @@ func MatchesRegexpCompiled(re *regexp.Regexp) func(string) bool {
 	}
 }
 
+// Equal returns a predicate that checks if two values are equal.
 func Equal[T comparable](a, b T) bool {
 	return a == b
+}
+
+// Zero returns true if a value is the zero value of its type.
+func Zero[T comparable](v T) bool {
+	var zero T
+	return v == zero
 }
