@@ -16,6 +16,8 @@ func Find[T any](s []T, f func(T) bool) (int, T) {
 	return -1, zero
 }
 
+// FindSeq returns the index and the element of the first element in the sequence that satisfies the predicate f.
+// If no element satisfies the predicate, FindSeq returns -1 and the zero value of the element type.
 func FindSeq[T any](s iter.Seq[T], f func(T) bool) (int, T) {
 	if s != nil {
 		i := 0
