@@ -3,7 +3,7 @@ package got
 import (
 	"testing"
 
-	. "github.com/jokruger/got/basic"
+	. "github.com/jokruger/got/generics"
 )
 
 func TestTernary(t *testing.T) {

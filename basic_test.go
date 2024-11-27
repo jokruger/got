@@ -1,10 +1,11 @@
 package got
 
 import (
+	"regexp"
 	"testing"
 
 	. "github.com/jokruger/got/basic"
-	. "github.com/jokruger/got/preds"
+	. "github.com/jokruger/got/generics"
 	gslices "github.com/jokruger/got/slices"
 )
 
@@ -68,4 +69,57 @@ func TestBasicPredicates(t *testing.T) {
 			t.Errorf("expected 2, 3, 4, got %v", r)
 		}
 	})
+
+	t.Run("String predicates", func(t *testing.T) {
+		s := []string{"apple", "banana", "cherry", "date", "elderberry"}
+		r := gslices.Filter(s, ContainsSubstring("rr"))
+		if len(r) != 2 {
+			t.Errorf("expected 2, got %d", len(r))
+		}
+		if r[0] != "cherry" || r[1] != "elderberry" {
+			t.Errorf("expected cherry, elderberry, got %v", r)
+		}
+
+		r = gslices.Filter(s, InString("applepie"))
+		if len(r) != 1 {
+			t.Errorf("expected 1, got %d", len(r))
+		}
+		if r[0] != "apple" {
+			t.Errorf("expected apple, got %v", r)
+		}
+
+		r = gslices.Filter(s, StartsWithString("b"))
+		if len(r) != 1 {
+			t.Errorf("expected 1, got %d", len(r))
+		}
+		if r[0] != "banana" {
+			t.Errorf("expected banana, got %v", r)
+		}
+
+		r = gslices.Filter(s, EndsWithString("e"))
+		if len(r) != 2 {
+			t.Errorf("expected 2, got %d", len(r))
+		}
+		if r[0] != "apple" || r[1] != "date" {
+			t.Errorf("expected apple, date, got %v", r)
+		}
+
+		r = gslices.Filter(s, MatchesRegexp(".*rr.*"))
+		if len(r) != 2 {
+			t.Errorf("expected 2, got %d", len(r))
+		}
+		if r[0] != "cherry" || r[1] != "elderberry" {
+			t.Errorf("expected cherry, elderberry, got %v", r)
+		}
+
+		rc := regexp.MustCompile(".*rr.*")
+		r = gslices.Filter(s, MatchesRegexpCompiled(rc))
+		if len(r) != 2 {
+			t.Errorf("expected 2, got %d", len(r))
+		}
+		if r[0] != "cherry" || r[1] != "elderberry" {
+			t.Errorf("expected cherry, elderberry, got %v", r)
+		}
+	})
+
 }

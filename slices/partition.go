@@ -3,7 +3,7 @@ package slices
 import (
 	"iter"
 
-	. "github.com/jokruger/got/preds"
+	. "github.com/jokruger/got/generics"
 )
 
 // Partition returns two slices, the first slice contains all elements that satisfy the predicate, and the second slice contains all elements that do not satisfy the predicate.

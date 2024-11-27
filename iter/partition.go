@@ -3,7 +3,7 @@ package iter
 import (
 	"iter"
 
-	. "github.com/jokruger/got/preds"
+	. "github.com/jokruger/got/generics"
 )
 
 // Partition returns two sequences, the first sequence contains all elements that satisfy the predicate, and the second sequence contains all elements that do not satisfy the predicate.
