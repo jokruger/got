@@ -1,4 +1,4 @@
-package got
+package basic
 
 // Ternary returns a if f() is true, otherwise b.
 func Ternary[T any](a T, b T, f func() bool) T {

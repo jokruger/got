@@ -451,4 +451,20 @@ func TestSet(t *testing.T) {
 			t.Error("Union should contain 4")
 		}
 	})
+
+	t.Run("Set of ints filter", func(t *testing.T) {
+		s := set.New(1, 2, 3, 4, 5)
+		filtered := s.Filter(func(e int) bool {
+			return e%2 == 0
+		})
+		if filtered.Len() != 2 {
+			t.Error("Filtered set should have length 2")
+		}
+		if !filtered.Contains(2) {
+			t.Error("Filtered set should contain 2")
+		}
+		if !filtered.Contains(4) {
+			t.Error("Filtered set should contain 4")
+		}
+	})
 }

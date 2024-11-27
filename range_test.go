@@ -3,6 +3,8 @@ package got
 import (
 	"slices"
 	"testing"
+
+	. "github.com/jokruger/got/basic"
 )
 
 func TestRange(t *testing.T) {

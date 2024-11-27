@@ -1,11 +1,11 @@
-package got
+package preds
 
 import (
 	"iter"
 	"regexp"
 	"strings"
 
-	"github.com/jokruger/got/set"
+	. "github.com/jokruger/got/ifs"
 )
 
 // Not returns a predicate that negates the result of the given predicate.
@@ -29,10 +29,18 @@ func Or[T any](f, g func(T) bool) func(T) bool {
 	}
 }
 
-// InSet returns a predicate that checks if a value is in a set.
-func InSet[T comparable](s set.Set[T]) func(T) bool {
+// InContainer returns a predicate that checks if a value is in container.
+func InContainer[T any](s Container[T]) func(T) bool {
 	return func(v T) bool {
 		return s.Contains(v)
+	}
+}
+
+// InSet returns a predicate that checks if a value is in a set.
+func InSet[T comparable](s map[T]interface{}) func(T) bool {
+	return func(v T) bool {
+		_, ok := s[v]
+		return ok
 	}
 }
 
@@ -65,48 +73,6 @@ func InSeq[T comparable](s iter.Seq[T]) func(T) bool {
 			}
 		}
 		return false
-	}
-}
-
-// InRange returns a predicate that checks if a value is in a range (inclusive).
-func InRange[T Ordered](min, max T) func(T) bool {
-	return func(v T) bool {
-		return v >= min && v <= max
-	}
-}
-
-// EqualTo returns a predicate that checks if a value is equal to a given value.
-func EqualTo[T comparable](v T) func(T) bool {
-	return func(x T) bool {
-		return x == v
-	}
-}
-
-// GreaterThan returns a predicate that checks if a value is greater than a given value.
-func GreaterThan[T Ordered](v T) func(T) bool {
-	return func(x T) bool {
-		return x > v
-	}
-}
-
-// LessThan returns a predicate that checks if a value is less than a given value.
-func LessThan[T Ordered](v T) func(T) bool {
-	return func(x T) bool {
-		return x < v
-	}
-}
-
-// GreaterOrEqualTo returns a predicate that checks if a value is greater than or equal to a given value.
-func GreaterOrEqualTo[T Ordered](v T) func(T) bool {
-	return func(x T) bool {
-		return x >= v
-	}
-}
-
-// LessOrEqualTo returns a predicate that checks if a value is less than or equal to a given value.
-func LessOrEqualTo[T Ordered](v T) func(T) bool {
-	return func(x T) bool {
-		return x <= v
 	}
 }
 
@@ -154,15 +120,4 @@ func MatchesRegexpCompiled(re *regexp.Regexp) func(string) bool {
 	return func(s string) bool {
 		return re.MatchString(s)
 	}
-}
-
-// Equal returns a predicate that checks if two values are equal.
-func Equal[T comparable](a, b T) bool {
-	return a == b
-}
-
-// Zero returns true if a value is the zero value of its type.
-func Zero[T comparable](v T) bool {
-	var zero T
-	return v == zero
 }

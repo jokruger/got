@@ -1,43 +1,127 @@
 package got
 
 import (
+	"slices"
 	"testing"
+
+	giter "github.com/jokruger/got/iter"
+	gslices "github.com/jokruger/got/slices"
 )
 
 func TestPartitions(t *testing.T) {
-	t.Run("PartitionToSeq", func(t *testing.T) {
-		slice := []int{1, 2, 3, 4, 5}
-		tgi, fgi := PartitionToSeq(slice, func(e int) bool { return e%2 == 0 })
-		tg := make([]int, 0)
-		for e := range tgi {
-			tg = append(tg, e)
+	t.Run("Partition iter", func(t *testing.T) {
+		s := slices.Values([]int{1, 2, 3, 4})
+		tg, fg := giter.Partition(s, func(i int) bool { return i%2 == 0 })
+		ts := slices.Collect(tg)
+		fs := slices.Collect(fg)
+		if len(ts) != 2 || ts[0] != 2 || ts[1] != 4 {
+			t.Errorf("Expected [2 4], got %v", ts)
 		}
-		fg := make([]int, 0)
-		for e := range fgi {
-			fg = append(fg, e)
+		if len(fs) != 2 || fs[0] != 1 || fs[1] != 3 {
+			t.Errorf("Expected [1 3], got %v", fs)
 		}
-		if len(tg) != 2 || tg[0] != 2 || tg[1] != 4 {
-			t.Errorf("PartitionToSeq failed, expected [2, 4], got %v", tg)
+
+		ts, fs = giter.PartitionToSlice(s, func(i int) bool { return i%2 == 0 })
+		if len(ts) != 2 || ts[0] != 2 || ts[1] != 4 {
+			t.Errorf("Expected [2 4], got %v", ts)
 		}
-		if len(fg) != 3 || fg[0] != 1 || fg[1] != 3 || fg[2] != 5 {
-			t.Errorf("PartitionToSeq failed, expected [1, 3, 5], got %v", fg)
+		if len(fs) != 2 || fs[0] != 1 || fs[1] != 3 {
+			t.Errorf("Expected [1 3], got %v", fs)
 		}
 	})
 
-	t.Run("PartitionConsEq", func(t *testing.T) {
-		s := []int{1, 1, 2, 2, 2, 3, 3, 3, 3}
-		r := PartitionConsEq(s, Equal)
-		if len(r) != 3 {
-			t.Errorf("PartitionConsEq failed, expected 3, got %d", len(r))
+	t.Run("PartitionConsEq iter", func(t *testing.T) {
+		s := slices.Values([]int{1, 1, 2, 2, 3, 4, 4, 4})
+		r := slices.Collect(giter.PartitionConsEq(s, func(a, b int) bool { return a == b }))
+		if len(r) != 4 {
+			t.Errorf("Expected 4 groups, got %v", r)
 		}
 		if len(r[0]) != 2 || r[0][0] != 1 || r[0][1] != 1 {
-			t.Errorf("PartitionConsEq failed, expected [1, 1], got %v", r[0])
+			t.Errorf("Expected [1 1], got %v", r[0])
 		}
-		if len(r[1]) != 3 || r[1][0] != 2 || r[1][1] != 2 || r[1][2] != 2 {
-			t.Errorf("PartitionConsEq failed, expected [2, 2, 2], got %v", r[1])
+		if len(r[1]) != 2 || r[1][0] != 2 || r[1][1] != 2 {
+			t.Errorf("Expected [2 2], got %v", r[1])
 		}
-		if len(r[2]) != 4 || r[2][0] != 3 || r[2][1] != 3 || r[2][2] != 3 || r[2][3] != 3 {
-			t.Errorf("PartitionConsEq failed, expected [3, 3, 3, 3], got %v", r[2])
+		if len(r[2]) != 1 || r[2][0] != 3 {
+			t.Errorf("Expected [3], got %v", r[2])
+		}
+		if len(r[3]) != 3 || r[3][0] != 4 || r[3][1] != 4 || r[3][2] != 4 {
+			t.Errorf("Expected [4 4 4], got %v", r[3])
+		}
+
+		r = giter.PartitionConsEqToSlice(s, func(a, b int) bool { return a == b })
+		if len(r) != 4 {
+			t.Errorf("Expected 4 groups, got %v", r)
+		}
+		if len(r[0]) != 2 || r[0][0] != 1 || r[0][1] != 1 {
+			t.Errorf("Expected [1 1], got %v", r[0])
+		}
+		if len(r[1]) != 2 || r[1][0] != 2 || r[1][1] != 2 {
+			t.Errorf("Expected [2 2], got %v", r[1])
+		}
+		if len(r[2]) != 1 || r[2][0] != 3 {
+			t.Errorf("Expected [3], got %v", r[2])
+		}
+		if len(r[3]) != 3 || r[3][0] != 4 || r[3][1] != 4 || r[3][2] != 4 {
+			t.Errorf("Expected [4 4 4], got %v", r[3])
+		}
+	})
+
+	t.Run("Partition slices", func(t *testing.T) {
+		s := []int{1, 2, 3, 4}
+		ts, fs := gslices.Partition(s, func(i int) bool { return i%2 == 0 })
+		if len(ts) != 2 || ts[0] != 2 || ts[1] != 4 {
+			t.Errorf("Expected [2 4], got %v", ts)
+		}
+		if len(fs) != 2 || fs[0] != 1 || fs[1] != 3 {
+			t.Errorf("Expected [1 3], got %v", fs)
+		}
+
+		tg, fg := gslices.PartitionToSeq(s, func(i int) bool { return i%2 == 0 })
+		ts = slices.Collect(tg)
+		fs = slices.Collect(fg)
+		if len(ts) != 2 || ts[0] != 2 || ts[1] != 4 {
+			t.Errorf("Expected [2 4], got %v", ts)
+		}
+		if len(fs) != 2 || fs[0] != 1 || fs[1] != 3 {
+			t.Errorf("Expected [1 3], got %v", fs)
+		}
+	})
+
+	t.Run("PartitionConsEq slices", func(t *testing.T) {
+		s := []int{1, 1, 2, 2, 3, 4, 4, 4}
+		r := gslices.PartitionConsEq(s, func(a, b int) bool { return a == b })
+		if len(r) != 4 {
+			t.Errorf("Expected 4 groups, got %v", r)
+		}
+		if len(r[0]) != 2 || r[0][0] != 1 || r[0][1] != 1 {
+			t.Errorf("Expected [1 1], got %v", r[0])
+		}
+		if len(r[1]) != 2 || r[1][0] != 2 || r[1][1] != 2 {
+			t.Errorf("Expected [2 2], got %v", r[1])
+		}
+		if len(r[2]) != 1 || r[2][0] != 3 {
+			t.Errorf("Expected [3], got %v", r[2])
+		}
+		if len(r[3]) != 3 || r[3][0] != 4 || r[3][1] != 4 || r[3][2] != 4 {
+			t.Errorf("Expected [4 4 4], got %v", r[3])
+		}
+
+		r = slices.Collect(gslices.PartitionConsEqToSeq(s, func(a, b int) bool { return a == b }))
+		if len(r) != 4 {
+			t.Errorf("Expected 4 groups, got %v", r)
+		}
+		if len(r[0]) != 2 || r[0][0] != 1 || r[0][1] != 1 {
+			t.Errorf("Expected [1 1], got %v", r[0])
+		}
+		if len(r[1]) != 2 || r[1][0] != 2 || r[1][1] != 2 {
+			t.Errorf("Expected [2 2], got %v", r[1])
+		}
+		if len(r[2]) != 1 || r[2][0] != 3 {
+			t.Errorf("Expected [3], got %v", r[2])
+		}
+		if len(r[3]) != 3 || r[3][0] != 4 || r[3][1] != 4 || r[3][2] != 4 {
+			t.Errorf("Expected [4 4 4], got %v", r[3])
 		}
 	})
 }

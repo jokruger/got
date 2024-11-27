@@ -4,6 +4,8 @@ import (
 	"iter"
 	"maps"
 	"slices"
+
+	giter "github.com/jokruger/got/iter"
 )
 
 // Set is a set of elements.
@@ -279,4 +281,32 @@ func (s Set[T]) ToSlice() []T {
 
 func (s Set[T]) ToSeq() iter.Seq[T] {
 	return maps.Keys(s)
+}
+
+// All returns true if all elements in set satisfy the predicate f.
+// If set is empty, All returns true.
+func (s Set[T]) All(f func(T) bool) bool {
+	return giter.All(s.ToSeq(), f)
+}
+
+// Any returns true if any element in set satisfies the predicate, false otherwise.
+// If set is empty, Any returns false.
+func (s Set[T]) Any(f func(T) bool) bool {
+	return giter.Any(s.ToSeq(), f)
+}
+
+// Count returns the number of elements in set that satisfy the predicate f.
+func (s Set[T]) Count(f func(T) bool) int {
+	return giter.Count(s.ToSeq(), f)
+}
+
+// Filter returns a new set containing only the elements that satisfy the predicate f.
+func (s Set[T]) Filter(f func(T) bool) Set[T] {
+	res := New[T]()
+	for e := range s {
+		if f(e) {
+			res[e] = nil
+		}
+	}
+	return res
 }

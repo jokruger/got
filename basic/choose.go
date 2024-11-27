@@ -1,4 +1,4 @@
-package got
+package basic
 
 // Choose returns the first non-zero value from the list of values.
 func Choose[T comparable](values ...T) T {

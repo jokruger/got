@@ -1,4 +1,4 @@
-package got
+package basic
 
 // Range returns a slice of integers from 0 to n-1.
 func Range(n int) []int {

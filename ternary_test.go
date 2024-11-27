@@ -2,6 +2,8 @@ package got
 
 import (
 	"testing"
+
+	. "github.com/jokruger/got/basic"
 )
 
 func TestTernary(t *testing.T) {

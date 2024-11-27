@@ -1,6 +1,11 @@
 package got
 
-import "testing"
+import (
+	"testing"
+
+	. "github.com/jokruger/got/basic"
+	gslices "github.com/jokruger/got/slices"
+)
 
 func TestGoInChunks(t *testing.T) {
 	t.Run("GoInChunks1", func(t *testing.T) {
@@ -8,7 +13,7 @@ func TestGoInChunks(t *testing.T) {
 		chunks := make([][]int, 0)
 		res := make([]int, 0)
 
-		if err := GoInChunks(tasks, 100, func(chunk []int) error {
+		if err := gslices.GoInChunks(tasks, 100, func(chunk []int) error {
 			chunks = append(chunks, chunk)
 			return nil
 		}); err != nil {
@@ -46,7 +51,7 @@ func TestGoInChunks(t *testing.T) {
 		tasks := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
 		sums := make([]int, 0)
 
-		if err := GoInChunks(tasks, 3, func(chunk []int) error {
+		if err := gslices.GoInChunks(tasks, 3, func(chunk []int) error {
 			sum := 0
 			for _, t := range chunk {
 				sum += t

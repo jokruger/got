@@ -1,11 +1,28 @@
 package got
 
-import "testing"
+import (
+	"slices"
+	"testing"
+
+	giter "github.com/jokruger/got/iter"
+	gslices "github.com/jokruger/got/slices"
+)
 
 func TestFilter(t *testing.T) {
-	t.Run("Filter ints", func(t *testing.T) {
+	t.Run("ints slice", func(t *testing.T) {
 		s := []int{1, 2, 3, 4, 5}
-		r := Filter(s, func(i int) bool { return i%2 == 0 })
+		r := gslices.Filter(s, func(i int) bool { return i%2 == 0 })
+		if len(r) != 2 {
+			t.Errorf("Expected 2, got %d", len(r))
+		}
+		if r[0] != 2 || r[1] != 4 {
+			t.Errorf("Expected [2, 4], got %v", r)
+		}
+
+		r = make([]int, 0)
+		for i := range gslices.FilterToSeq(s, func(i int) bool { return i%2 == 0 }) {
+			r = append(r, i)
+		}
 		if len(r) != 2 {
 			t.Errorf("Expected 2, got %d", len(r))
 		}
@@ -14,28 +31,25 @@ func TestFilter(t *testing.T) {
 		}
 	})
 
-	t.Run("FilterSet strings", func(t *testing.T) {
-		s := []string{"a", "b", "c", "d", "e", "a"}
-		r := Filter(s, func(i string) bool { return i == "a" })
+	t.Run("ints iter", func(t *testing.T) {
+		s := slices.Values([]int{1, 2, 3, 4, 5})
+		r := make([]int, 0)
+		for i := range giter.Filter(s, func(i int) bool { return i%2 == 0 }) {
+			r = append(r, i)
+		}
 		if len(r) != 2 {
 			t.Errorf("Expected 2, got %d", len(r))
 		}
-		if r[0] != "a" || r[1] != "a" {
-			t.Errorf("Expected [a, a], got %v", r)
+		if r[0] != 2 || r[1] != 4 {
+			t.Errorf("Expected [2, 4], got %v", r)
 		}
-	})
 
-	t.Run("FilterToSeq ints", func(t *testing.T) {
-		s := []int{1, 2, 3, 4, 5}
-		var res []int
-		for r := range FilterToSeq(s, func(i int) bool { return i%2 == 0 }) {
-			res = append(res, r)
+		r = giter.FilterToSlice(s, func(i int) bool { return i%2 == 0 })
+		if len(r) != 2 {
+			t.Errorf("Expected 2, got %d", len(r))
 		}
-		if len(res) != 2 {
-			t.Errorf("Expected 2, got %d", len(res))
-		}
-		if res[0] != 2 || res[1] != 4 {
-			t.Errorf("Expected [2, 4], got %v", res)
+		if r[0] != 2 || r[1] != 4 {
+			t.Errorf("Expected [2, 4], got %v", r)
 		}
 	})
 }

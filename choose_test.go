@@ -1,6 +1,10 @@
 package got
 
-import "testing"
+import (
+	"testing"
+
+	. "github.com/jokruger/got/basic"
+)
 
 func TestChoose(t *testing.T) {
 	t.Run("Choose", func(t *testing.T) {

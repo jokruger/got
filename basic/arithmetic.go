@@ -1,4 +1,8 @@
-package got
+package basic
+
+import (
+	. "github.com/jokruger/got/ifs"
+)
 
 // Add returns the sum of two numbers.
 func Add[T Numeric](a, b T) T {
