@@ -11,3 +11,11 @@ type Ordered interface {
 type Container[T any] interface {
 	Contains(T) bool
 }
+
+type IDProvider[T any] interface {
+	GetID() T
+}
+
+type NameProvider interface {
+	GetName() string
+}
