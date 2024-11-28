@@ -28,6 +28,10 @@ func GetName[I any, T NameProvider[I]](s T) I {
 	return s.GetName()
 }
 
+func GetEventName[I any, T EventNameProvider[I]](s T) I {
+	return s.GetEventName()
+}
+
 func GetValueTime[I any, T ValueTimeProvider[I]](s T) I {
 	return s.GetValueTime()
 }

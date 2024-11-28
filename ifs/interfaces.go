@@ -48,6 +48,10 @@ type NameProvider[T any] interface {
 	GetName() T
 }
 
+type EventNameProvider[T any] interface {
+	GetEventName() T
+}
+
 type ValueTimeProvider[T any] interface {
 	GetValueTime() T
 }
