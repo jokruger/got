@@ -26,3 +26,21 @@ func Choose[T comparable](values ...T) T {
 	}
 	return zero
 }
+
+// Compare returns -1 if a < b, 0 if a == b, and 1 if a > b.
+func Compare[T Ordered](a, b T) int {
+	if a < b {
+		return -1
+	}
+	if a > b {
+		return 1
+	}
+	return 0
+}
+
+// CompareTo returns a function that compares a value to another value.
+func CompareTo[T Ordered](b T) func(T) int {
+	return func(a T) int {
+		return Compare(a, b)
+	}
+}

@@ -16,8 +16,8 @@ type Container[T any] interface {
 	Contains(T) bool
 }
 
-type CompareProvider interface {
-	Compare(CompareProvider) int
+type CompareProvider[T any] interface {
+	Compare(T) int
 }
 
 type ZeroTestProvider interface {
