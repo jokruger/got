@@ -59,3 +59,7 @@ type CreatedAtProvider[T any] interface {
 type UpdatedAtProvider[T any] interface {
 	GetUpdatedAt() T
 }
+
+type AmountProvider[T any] interface {
+	GetAmount() T
+}

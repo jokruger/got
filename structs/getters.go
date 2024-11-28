@@ -39,3 +39,7 @@ func GetCreatedAt[I any, T CreatedAtProvider[I]](s T) I {
 func GetUpdatedAt[I any, T UpdatedAtProvider[I]](s T) I {
 	return s.GetUpdatedAt()
 }
+
+func GetAmount[I any, T AmountProvider[I]](s T) I {
+	return s.GetAmount()
+}
