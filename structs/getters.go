@@ -43,3 +43,7 @@ func GetUpdatedAt[I any, T UpdatedAtProvider[I]](s T) I {
 func GetAmount[I any, T AmountProvider[I]](s T) I {
 	return s.GetAmount()
 }
+
+func GetTransactionID[I any, T TransactionIDProvider[I]](s T) I {
+	return s.GetTransactionID()
+}

@@ -63,3 +63,7 @@ type UpdatedAtProvider[T any] interface {
 type AmountProvider[T any] interface {
 	GetAmount() T
 }
+
+type TransactionIDProvider[T any] interface {
+	GetTransactionID() T
+}
