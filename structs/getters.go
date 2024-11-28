@@ -51,3 +51,7 @@ func GetAmount[I any, T AmountProvider[I]](s T) I {
 func GetTransactionID[I any, T TransactionIDProvider[I]](s T) I {
 	return s.GetTransactionID()
 }
+
+func GetPriority[I any, T PriorityProvider[I]](s T) I {
+	return s.GetPriority()
+}

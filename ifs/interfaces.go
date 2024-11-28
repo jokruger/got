@@ -71,3 +71,7 @@ type AmountProvider[T any] interface {
 type TransactionIDProvider[T any] interface {
 	GetTransactionID() T
 }
+
+type PriorityProvider[T any] interface {
+	GetPriority() T
+}
