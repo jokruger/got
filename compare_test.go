@@ -41,11 +41,11 @@ func TestCompare(t *testing.T) {
 			{ID: 1, Name: "One"},
 			{ID: 2, Name: "Two"},
 		}
-		gslices.Sort(ms, gstructs.CompareBy[TestCompareStruct](gstructs.GetID))
+		gslices.Sort(ms, gbasic.CompareBy[TestCompareStruct](gstructs.GetID))
 		if len(ms) != 3 || ms[0].ID != 1 || ms[1].ID != 2 || ms[2].ID != 3 {
 			t.Error("Sort failed")
 		}
-		gslices.Sort(ms, Flip(gstructs.CompareBy[TestCompareStruct](gstructs.GetID)))
+		gslices.Sort(ms, Flip(gbasic.CompareBy[TestCompareStruct](gstructs.GetID)))
 		if len(ms) != 3 || ms[0].ID != 3 || ms[1].ID != 2 || ms[2].ID != 1 {
 			t.Error("Sort failed")
 		}
@@ -58,14 +58,14 @@ func TestCompare(t *testing.T) {
 			{ID: 2, Name: "B"},
 			{ID: 3, Name: "C"},
 		}
-		gslices.Sort(ms, gstructs.CompareBy2[TestCompareStruct](gstructs.GetID, gstructs.GetName))
+		gslices.Sort(ms, gbasic.CompareBy2[TestCompareStruct](gstructs.GetID, gstructs.GetName))
 		if len(ms) != 4 || ms[0].ID != 1 || ms[1].ID != 2 || ms[2].ID != 3 || ms[3].ID != 3 {
 			t.Error("Sort failed")
 		}
 		if ms[0].Name != "A" || ms[1].Name != "B" || ms[2].Name != "C" || ms[3].Name != "D" {
 			t.Error("Sort failed")
 		}
-		gslices.Sort(ms, Flip(gstructs.CompareBy2[TestCompareStruct](gstructs.GetID, gstructs.GetName)))
+		gslices.Sort(ms, Flip(gbasic.CompareBy2[TestCompareStruct](gstructs.GetID, gstructs.GetName)))
 		if len(ms) != 4 || ms[0].ID != 3 || ms[1].ID != 3 || ms[2].ID != 2 || ms[3].ID != 1 {
 			t.Error("Sort failed")
 		}
