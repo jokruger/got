@@ -30,6 +30,8 @@ func CompareTo[T any, V CompareProvider[T]](b T) func(V) int {
 	}
 }
 
+// CompareBy returns a function that compares two values by a given function.
+// The function must return a value that implements the CompareProvider interface.
 func CompareBy[T any, V CompareProvider[V]](f func(T) V) func(T, T) int {
 	return func(a, b T) int {
 		return f(a).Compare(f(b))
