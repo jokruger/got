@@ -14,13 +14,20 @@ type TestCompareStruct struct {
 	Name string
 }
 
-func (t TestCompareStruct) GetID() int {
-	return t.ID
+func (t TestCompareStruct) GetID() int      { return t.ID }
+func (t TestCompareStruct) GetName() string { return t.Name }
+
+type IDStruct struct {
+	ID int
 }
 
-func (t TestCompareStruct) GetName() string {
-	return t.Name
+func (i IDStruct) Compare(j IDStruct) int { return i.ID - j.ID }
+
+type TestCompareStruct2 struct {
+	ID IDStruct
 }
+
+func (t TestCompareStruct2) GetID() IDStruct { return t.ID }
 
 func TestCompare(t *testing.T) {
 	t.Run("ints slice", func(t *testing.T) {
@@ -70,6 +77,19 @@ func TestCompare(t *testing.T) {
 			t.Error("Sort failed")
 		}
 		if ms[0].Name != "D" || ms[1].Name != "C" || ms[2].Name != "B" || ms[3].Name != "A" {
+			t.Error("Sort failed")
+		}
+	})
+
+	t.Run("compare structs by complex field", func(t *testing.T) {
+		ms := []TestCompareStruct2{
+			{ID: IDStruct{ID: 3}},
+			{ID: IDStruct{ID: 1}},
+			{ID: IDStruct{ID: 2}},
+		}
+
+		gslices.Sort(ms, gstructs.CompareBy[TestCompareStruct2](gstructs.GetID))
+		if len(ms) != 3 || ms[0].ID.ID != 1 || ms[1].ID.ID != 2 || ms[2].ID.ID != 3 {
 			t.Error("Sort failed")
 		}
 	})

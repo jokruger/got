@@ -29,3 +29,9 @@ func CompareTo[T any, V CompareProvider[T]](b T) func(V) int {
 		return a.Compare(b)
 	}
 }
+
+func CompareBy[T any, V CompareProvider[V]](f func(T) V) func(T, T) int {
+	return func(a, b T) int {
+		return f(a).Compare(f(b))
+	}
+}
