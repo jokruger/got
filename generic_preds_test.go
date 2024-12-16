@@ -12,7 +12,7 @@ import (
 func TestPredicates(t *testing.T) {
 	t.Run("InSet", func(t *testing.T) {
 		s := []int{1, 2, 3, 4, 5}
-		f := set.New(4, 3, 2)
+		f := set.NewFromElements(4, 3, 2)
 		r := gslices.Filter(s, InSet(f))
 		if len(r) != 3 {
 			t.Errorf("expected 3, got %d", len(r))
@@ -23,7 +23,7 @@ func TestPredicates(t *testing.T) {
 	})
 	t.Run("Not InSet", func(t *testing.T) {
 		s := []int{1, 2, 3, 4, 5}
-		f := set.New(4, 3, 2)
+		f := set.NewFromElements(4, 3, 2)
 		r := gslices.Filter(s, Not(InSet(f)))
 		if len(r) != 2 {
 			t.Errorf("expected 2, got %d", len(r))

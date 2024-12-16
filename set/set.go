@@ -11,8 +11,26 @@ import (
 // Set is a set of elements.
 type Set[T comparable] map[T]interface{}
 
-// New creates a new set with the given elements.
-func New[T comparable](elements ...T) Set[T] {
+// New creates a new set with the given options.
+func New[T comparable](options ...Option) Set[T] {
+	opts := Options{}
+	for _, o := range options {
+		o(&opts)
+	}
+
+	var s Set[T]
+
+	if opts.capacity > 0 {
+		s = make(Set[T], opts.capacity)
+	} else {
+		s = make(Set[T])
+	}
+
+	return s
+}
+
+// NewFromElements creates a new set with the given elements.
+func NewFromElements[T comparable](elements ...T) Set[T] {
 	s := make(Set[T])
 	for _, e := range elements {
 		s[e] = nil
