@@ -7,3 +7,10 @@ func Values[K comparable, V any](m map[K]V) []V {
 	}
 	return values
 }
+
+func ValuesTo[K comparable, V any](m map[K]V, dest []V) []V {
+	for _, value := range m {
+		dest = append(dest, value)
+	}
+	return dest
+}
