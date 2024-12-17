@@ -5,24 +5,24 @@ import (
 	"testing"
 
 	"github.com/jokruger/got"
-	"github.com/jokruger/got/basicutils"
-	"github.com/jokruger/got/sliceutils"
+	"github.com/jokruger/got/basicutil"
+	"github.com/jokruger/got/sliceutil"
 )
 
 func TestBasicArithmetic(t *testing.T) {
-	if basicutils.Add(1, 2) != 3 {
+	if basicutil.Add(1, 2) != 3 {
 		t.Error("Add(1, 2) != 3")
 	}
 
-	if basicutils.Sub(1, 2) != -1 {
+	if basicutil.Sub(1, 2) != -1 {
 		t.Error("Sub(1, 2) != -1")
 	}
 
-	if basicutils.Mul(3, 2) != 6 {
+	if basicutil.Mul(3, 2) != 6 {
 		t.Error("Mul(3, 2) != 6")
 	}
 
-	if basicutils.Div(6, 2) != 3 {
+	if basicutil.Div(6, 2) != 3 {
 		t.Error("Div(6, 2) != 3")
 	}
 }
@@ -30,7 +30,7 @@ func TestBasicArithmetic(t *testing.T) {
 func TestBasicPredicates(t *testing.T) {
 	t.Run("LessThan 2 OR GreaterThan 4", func(t *testing.T) {
 		s := []int{1, 2, 3, 4, 5}
-		r := sliceutils.Filter(s, got.Or(basicutils.LessThan(2), basicutils.GreaterThan(4)))
+		r := sliceutil.Filter(s, got.Or(basicutil.LessThan(2), basicutil.GreaterThan(4)))
 		if len(r) != 2 {
 			t.Errorf("expected 2, got %d", len(r))
 		}
@@ -40,7 +40,7 @@ func TestBasicPredicates(t *testing.T) {
 	})
 	t.Run("GreaterOrEqualTo 2 AND LessOrEqualTo 4", func(t *testing.T) {
 		s := []int{1, 2, 3, 4, 5}
-		r := sliceutils.Filter(s, got.And(basicutils.GreaterOrEqualTo(2), basicutils.LessOrEqualTo(4)))
+		r := sliceutil.Filter(s, got.And(basicutil.GreaterOrEqualTo(2), basicutil.LessOrEqualTo(4)))
 		if len(r) != 3 {
 			t.Errorf("expected 3, got %d", len(r))
 		}
@@ -50,7 +50,7 @@ func TestBasicPredicates(t *testing.T) {
 	})
 	t.Run("Not EqualTo 3", func(t *testing.T) {
 		s := []int{1, 2, 3, 4, 5}
-		r := sliceutils.Filter(s, got.Not(basicutils.EqualTo(3)))
+		r := sliceutil.Filter(s, got.Not(basicutil.EqualTo(3)))
 		if len(r) != 4 {
 			t.Errorf("expected 4, got %d", len(r))
 		}
@@ -61,7 +61,7 @@ func TestBasicPredicates(t *testing.T) {
 
 	t.Run("InRange", func(t *testing.T) {
 		s := []int{1, 2, 3, 4, 5}
-		r := sliceutils.Filter(s, basicutils.InRange(2, 4))
+		r := sliceutil.Filter(s, basicutil.InRange(2, 4))
 		if len(r) != 3 {
 			t.Errorf("expected 3, got %d", len(r))
 		}
@@ -72,7 +72,7 @@ func TestBasicPredicates(t *testing.T) {
 
 	t.Run("String predicates", func(t *testing.T) {
 		s := []string{"apple", "banana", "cherry", "date", "elderberry"}
-		r := sliceutils.Filter(s, basicutils.ContainsSubstring("rr"))
+		r := sliceutil.Filter(s, basicutil.ContainsSubstring("rr"))
 		if len(r) != 2 {
 			t.Errorf("expected 2, got %d", len(r))
 		}
@@ -80,7 +80,7 @@ func TestBasicPredicates(t *testing.T) {
 			t.Errorf("expected cherry, elderberry, got %v", r)
 		}
 
-		r = sliceutils.Filter(s, basicutils.InString("applepie"))
+		r = sliceutil.Filter(s, basicutil.InString("applepie"))
 		if len(r) != 1 {
 			t.Errorf("expected 1, got %d", len(r))
 		}
@@ -88,7 +88,7 @@ func TestBasicPredicates(t *testing.T) {
 			t.Errorf("expected apple, got %v", r)
 		}
 
-		r = sliceutils.Filter(s, basicutils.StartsWithString("b"))
+		r = sliceutil.Filter(s, basicutil.StartsWithString("b"))
 		if len(r) != 1 {
 			t.Errorf("expected 1, got %d", len(r))
 		}
@@ -96,7 +96,7 @@ func TestBasicPredicates(t *testing.T) {
 			t.Errorf("expected banana, got %v", r)
 		}
 
-		r = sliceutils.Filter(s, basicutils.EndsWithString("e"))
+		r = sliceutil.Filter(s, basicutil.EndsWithString("e"))
 		if len(r) != 2 {
 			t.Errorf("expected 2, got %d", len(r))
 		}
@@ -104,7 +104,7 @@ func TestBasicPredicates(t *testing.T) {
 			t.Errorf("expected apple, date, got %v", r)
 		}
 
-		r = sliceutils.Filter(s, basicutils.MatchesRegexp(".*rr.*"))
+		r = sliceutil.Filter(s, basicutil.MatchesRegexp(".*rr.*"))
 		if len(r) != 2 {
 			t.Errorf("expected 2, got %d", len(r))
 		}
@@ -113,7 +113,7 @@ func TestBasicPredicates(t *testing.T) {
 		}
 
 		rc := regexp.MustCompile(".*rr.*")
-		r = sliceutils.Filter(s, basicutils.MatchesRegexpCompiled(rc))
+		r = sliceutil.Filter(s, basicutil.MatchesRegexpCompiled(rc))
 		if len(r) != 2 {
 			t.Errorf("expected 2, got %d", len(r))
 		}

@@ -3,8 +3,8 @@ package tests
 import (
 	"testing"
 
-	"github.com/jokruger/got/sliceutils"
-	"github.com/jokruger/got/structutils"
+	"github.com/jokruger/got/sliceutil"
+	"github.com/jokruger/got/structutil"
 )
 
 type TestGettersStruct struct {
@@ -28,7 +28,7 @@ func TestGetters(t *testing.T) {
 	}
 
 	t.Run("get id", func(t *testing.T) {
-		ids := sliceutils.Map(ms, structutils.GetID)
+		ids := sliceutil.Map(ms, structutil.GetID)
 		if len(ids) != 3 {
 			t.Fatalf("expected 3 ids, got %d", len(ids))
 		}
@@ -38,7 +38,7 @@ func TestGetters(t *testing.T) {
 	})
 
 	t.Run("get name", func(t *testing.T) {
-		names := sliceutils.Map(ms, structutils.GetName)
+		names := sliceutil.Map(ms, structutil.GetName)
 		if len(names) != 3 {
 			t.Fatalf("expected 3 names, got %d", len(names))
 		}

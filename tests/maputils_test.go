@@ -4,20 +4,20 @@ import (
 	"slices"
 	"testing"
 
-	"github.com/jokruger/got/maputils"
+	"github.com/jokruger/got/maputil"
 )
 
 func TestMaps(t *testing.T) {
 	t.Run("keys/values", func(t *testing.T) {
 		m := map[int]string{1: "a", 2: "b", 3: "c"}
 
-		ks := maputils.Keys(m)
+		ks := maputil.Keys(m)
 		slices.Sort(ks)
 		if len(ks) != 3 || ks[0] != 1 || ks[1] != 2 || ks[2] != 3 {
 			t.Errorf("Keys() = %v; want [1 2 3]", ks)
 		}
 
-		vs := maputils.Values(m)
+		vs := maputil.Values(m)
 		slices.Sort(vs)
 		if len(vs) != 3 || vs[0] != "a" || vs[1] != "b" || vs[2] != "c" {
 			t.Errorf("Values() = %v; want [a b c]", vs)
@@ -29,25 +29,25 @@ func TestMaps(t *testing.T) {
 		ks := make([]int, 10)
 		vs := make([]string, 10)
 
-		ks = maputils.KeysTo(m, ks[:0])
+		ks = maputil.KeysTo(m, ks[:0])
 		slices.Sort(ks)
 		if len(ks) != 3 || ks[0] != 1 || ks[1] != 2 || ks[2] != 3 {
 			t.Errorf("Keys() = %v; want [1 2 3]", ks)
 		}
 
-		ks = maputils.KeysTo(m, nil)
+		ks = maputil.KeysTo(m, nil)
 		slices.Sort(ks)
 		if len(ks) != 3 || ks[0] != 1 || ks[1] != 2 || ks[2] != 3 {
 			t.Errorf("Keys() = %v; want [1 2 3]", ks)
 		}
 
-		vs = maputils.ValuesTo(m, vs[:0])
+		vs = maputil.ValuesTo(m, vs[:0])
 		slices.Sort(vs)
 		if len(vs) != 3 || vs[0] != "a" || vs[1] != "b" || vs[2] != "c" {
 			t.Errorf("Values() = %v; want [a b c]", vs)
 		}
 
-		vs = maputils.ValuesTo(m, nil)
+		vs = maputil.ValuesTo(m, nil)
 		slices.Sort(vs)
 		if len(vs) != 3 || vs[0] != "a" || vs[1] != "b" || vs[2] != "c" {
 			t.Errorf("Values() = %v; want [a b c]", vs)

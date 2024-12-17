@@ -4,8 +4,8 @@ import (
 	"slices"
 	"testing"
 
-	"github.com/jokruger/got/sequtils"
-	"github.com/jokruger/got/sliceutils"
+	"github.com/jokruger/got/sequtil"
+	"github.com/jokruger/got/sliceutil"
 )
 
 func TestGroup(t *testing.T) {
@@ -20,7 +20,7 @@ func TestGroup(t *testing.T) {
 			{1, "c"},
 			{2, "d"},
 		}
-		m := sliceutils.GroupBy(slice, func(x X) (int, string) { return x.A, x.B })
+		m := sliceutil.GroupBy(slice, func(x X) (int, string) { return x.A, x.B })
 		if len(m) != 2 {
 			t.Errorf("len(m) = %d; want 2", len(m))
 		}
@@ -55,7 +55,7 @@ func TestGroup(t *testing.T) {
 			{1, "c"},
 			{2, "d"},
 		}
-		m := sequtils.GroupBy(slices.Values(slice), func(x X) (int, string) { return x.A, x.B })
+		m := sequtil.GroupBy(slices.Values(slice), func(x X) (int, string) { return x.A, x.B })
 		if len(m) != 2 {
 			t.Errorf("len(m) = %d; want 2", len(m))
 		}

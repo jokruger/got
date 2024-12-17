@@ -4,14 +4,14 @@ import (
 	"slices"
 	"testing"
 
-	"github.com/jokruger/got/sequtils"
-	"github.com/jokruger/got/sliceutils"
+	"github.com/jokruger/got/sequtil"
+	"github.com/jokruger/got/sliceutil"
 )
 
 func TestPartitions(t *testing.T) {
 	t.Run("Partition iter", func(t *testing.T) {
 		s := slices.Values([]int{1, 2, 3, 4})
-		tg, fg := sequtils.Partition(s, func(i int) bool { return i%2 == 0 })
+		tg, fg := sequtil.Partition(s, func(i int) bool { return i%2 == 0 })
 		ts := slices.Collect(tg)
 		fs := slices.Collect(fg)
 		if len(ts) != 2 || ts[0] != 2 || ts[1] != 4 {
@@ -21,7 +21,7 @@ func TestPartitions(t *testing.T) {
 			t.Errorf("Expected [1 3], got %v", fs)
 		}
 
-		ts, fs = sequtils.PartitionToSlice(s, func(i int) bool { return i%2 == 0 })
+		ts, fs = sequtil.PartitionToSlice(s, func(i int) bool { return i%2 == 0 })
 		if len(ts) != 2 || ts[0] != 2 || ts[1] != 4 {
 			t.Errorf("Expected [2 4], got %v", ts)
 		}
@@ -32,7 +32,7 @@ func TestPartitions(t *testing.T) {
 
 	t.Run("PartitionConsEq iter", func(t *testing.T) {
 		s := slices.Values([]int{1, 1, 2, 2, 3, 4, 4, 4})
-		r := slices.Collect(sequtils.PartitionConsEq(s, func(a, b int) bool { return a == b }))
+		r := slices.Collect(sequtil.PartitionConsEq(s, func(a, b int) bool { return a == b }))
 		if len(r) != 4 {
 			t.Errorf("Expected 4 groups, got %v", r)
 		}
@@ -49,7 +49,7 @@ func TestPartitions(t *testing.T) {
 			t.Errorf("Expected [4 4 4], got %v", r[3])
 		}
 
-		r = sequtils.PartitionConsEqToSlice(s, func(a, b int) bool { return a == b })
+		r = sequtil.PartitionConsEqToSlice(s, func(a, b int) bool { return a == b })
 		if len(r) != 4 {
 			t.Errorf("Expected 4 groups, got %v", r)
 		}
@@ -69,7 +69,7 @@ func TestPartitions(t *testing.T) {
 
 	t.Run("Partition slices", func(t *testing.T) {
 		s := []int{1, 2, 3, 4}
-		ts, fs := sliceutils.Partition(s, func(i int) bool { return i%2 == 0 })
+		ts, fs := sliceutil.Partition(s, func(i int) bool { return i%2 == 0 })
 		if len(ts) != 2 || ts[0] != 2 || ts[1] != 4 {
 			t.Errorf("Expected [2 4], got %v", ts)
 		}
@@ -77,7 +77,7 @@ func TestPartitions(t *testing.T) {
 			t.Errorf("Expected [1 3], got %v", fs)
 		}
 
-		tg, fg := sliceutils.PartitionToSeq(s, func(i int) bool { return i%2 == 0 })
+		tg, fg := sliceutil.PartitionToSeq(s, func(i int) bool { return i%2 == 0 })
 		ts = slices.Collect(tg)
 		fs = slices.Collect(fg)
 		if len(ts) != 2 || ts[0] != 2 || ts[1] != 4 {
@@ -90,7 +90,7 @@ func TestPartitions(t *testing.T) {
 
 	t.Run("PartitionConsEq slices", func(t *testing.T) {
 		s := []int{1, 1, 2, 2, 3, 4, 4, 4}
-		r := sliceutils.PartitionConsEq(s, func(a, b int) bool { return a == b })
+		r := sliceutil.PartitionConsEq(s, func(a, b int) bool { return a == b })
 		if len(r) != 4 {
 			t.Errorf("Expected 4 groups, got %v", r)
 		}
@@ -107,7 +107,7 @@ func TestPartitions(t *testing.T) {
 			t.Errorf("Expected [4 4 4], got %v", r[3])
 		}
 
-		r = slices.Collect(sliceutils.PartitionConsEqToSeq(s, func(a, b int) bool { return a == b }))
+		r = slices.Collect(sliceutil.PartitionConsEqToSeq(s, func(a, b int) bool { return a == b }))
 		if len(r) != 4 {
 			t.Errorf("Expected 4 groups, got %v", r)
 		}

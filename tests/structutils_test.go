@@ -4,8 +4,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/jokruger/got/sliceutils"
-	"github.com/jokruger/got/structutils"
+	"github.com/jokruger/got/sliceutil"
+	"github.com/jokruger/got/structutil"
 )
 
 func TestStructs(t *testing.T) {
@@ -15,7 +15,7 @@ func TestStructs(t *testing.T) {
 		c := time.Date(2021, 1, 1, 0, 0, 0, 0, time.UTC)
 		s := []time.Time{a, b, c}
 
-		r := sliceutils.Map(s, structutils.InRange[time.Time, time.Time](a, b))
+		r := sliceutil.Map(s, structutil.InRange[time.Time, time.Time](a, b))
 		if len(r) != 3 {
 			t.Errorf("expected 3, got %d", len(r))
 		}
@@ -23,7 +23,7 @@ func TestStructs(t *testing.T) {
 			t.Errorf("expected [true, true, false], got %v", r)
 		}
 
-		r = sliceutils.Map(s, structutils.GreaterThan[time.Time, time.Time](b))
+		r = sliceutil.Map(s, structutil.GreaterThan[time.Time, time.Time](b))
 		if len(r) != 3 {
 			t.Errorf("expected 3, got %d", len(r))
 		}
@@ -31,7 +31,7 @@ func TestStructs(t *testing.T) {
 			t.Errorf("expected [false, false, true], got %v", r)
 		}
 
-		r = sliceutils.Map(s, structutils.LessThan[time.Time, time.Time](b))
+		r = sliceutil.Map(s, structutil.LessThan[time.Time, time.Time](b))
 		if len(r) != 3 {
 			t.Errorf("expected 3, got %d", len(r))
 		}
@@ -39,7 +39,7 @@ func TestStructs(t *testing.T) {
 			t.Errorf("expected [true, false, false], got %v", r)
 		}
 
-		r = sliceutils.Map(s, structutils.GreaterOrEqualTo[time.Time, time.Time](b))
+		r = sliceutil.Map(s, structutil.GreaterOrEqualTo[time.Time, time.Time](b))
 		if len(r) != 3 {
 			t.Errorf("expected 3, got %d", len(r))
 		}
@@ -47,7 +47,7 @@ func TestStructs(t *testing.T) {
 			t.Errorf("expected [false, true, true], got %v", r)
 		}
 
-		r = sliceutils.Map(s, structutils.LessOrEqualTo[time.Time, time.Time](b))
+		r = sliceutil.Map(s, structutil.LessOrEqualTo[time.Time, time.Time](b))
 		if len(r) != 3 {
 			t.Errorf("expected 3, got %d", len(r))
 		}
@@ -55,7 +55,7 @@ func TestStructs(t *testing.T) {
 			t.Errorf("expected [true, true, false], got %v", r)
 		}
 
-		r = sliceutils.Map(s, structutils.EqualTo[time.Time, time.Time](b))
+		r = sliceutil.Map(s, structutil.EqualTo[time.Time, time.Time](b))
 		if len(r) != 3 {
 			t.Errorf("expected 3, got %d", len(r))
 		}
@@ -63,15 +63,15 @@ func TestStructs(t *testing.T) {
 			t.Errorf("expected [false, true, false], got %v", r)
 		}
 
-		if structutils.Equal[time.Time, time.Time](a, a) != true {
+		if structutil.Equal[time.Time, time.Time](a, a) != true {
 			t.Errorf("expected true, got false")
 		}
-		if structutils.Equal[time.Time, time.Time](a, b) != false {
+		if structutil.Equal[time.Time, time.Time](a, b) != false {
 			t.Errorf("expected false, got true")
 		}
 
 		s = append(s, time.Time{})
-		r = sliceutils.Map(s, structutils.IsZero)
+		r = sliceutil.Map(s, structutil.IsZero)
 		if len(r) != 4 {
 			t.Errorf("expected 4, got %d", len(r))
 		}

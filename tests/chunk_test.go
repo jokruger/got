@@ -3,17 +3,17 @@ package tests
 import (
 	"testing"
 
-	"github.com/jokruger/got/basicutils"
-	"github.com/jokruger/got/sliceutils"
+	"github.com/jokruger/got/basicutil"
+	"github.com/jokruger/got/sliceutil"
 )
 
 func TestGoInChunks(t *testing.T) {
 	t.Run("GoInChunks1", func(t *testing.T) {
-		tasks := basicutils.Range(999)
+		tasks := basicutil.Range(999)
 		chunks := make([][]int, 0)
 		res := make([]int, 0)
 
-		if err := sliceutils.GoInChunks(tasks, 100, func(chunk []int) error {
+		if err := sliceutil.GoInChunks(tasks, 100, func(chunk []int) error {
 			chunks = append(chunks, chunk)
 			return nil
 		}); err != nil {
@@ -51,7 +51,7 @@ func TestGoInChunks(t *testing.T) {
 		tasks := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
 		sums := make([]int, 0)
 
-		if err := sliceutils.GoInChunks(tasks, 3, func(chunk []int) error {
+		if err := sliceutil.GoInChunks(tasks, 3, func(chunk []int) error {
 			sum := 0
 			for _, t := range chunk {
 				sum += t
