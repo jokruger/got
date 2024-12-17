@@ -9,7 +9,7 @@ import (
 )
 
 // Set is a set of elements.
-type Set[T comparable] map[T]interface{}
+type Set[T comparable] map[T]struct{}
 
 // New creates a new set with the given options.
 func New[T comparable](options ...Option) Set[T] {
@@ -33,7 +33,7 @@ func New[T comparable](options ...Option) Set[T] {
 func NewFromElements[T comparable](elements ...T) Set[T] {
 	s := make(Set[T])
 	for _, e := range elements {
-		s[e] = nil
+		s[e] = struct{}{}
 	}
 	return s
 }
@@ -42,7 +42,7 @@ func NewFromElements[T comparable](elements ...T) Set[T] {
 func NewFromSlice[T comparable](source []T) Set[T] {
 	s := make(Set[T])
 	for _, e := range source {
-		s[e] = nil
+		s[e] = struct{}{}
 	}
 	return s
 }
@@ -51,7 +51,7 @@ func NewFromSlice[T comparable](source []T) Set[T] {
 func NewFromSeq[T comparable](source iter.Seq[T]) Set[T] {
 	s := make(Set[T])
 	for e := range source {
-		s[e] = nil
+		s[e] = struct{}{}
 	}
 	return s
 }
@@ -60,7 +60,7 @@ func NewFromSeq[T comparable](source iter.Seq[T]) Set[T] {
 func NewFromSet[T comparable](source Set[T]) Set[T] {
 	s := make(Set[T])
 	for e := range source {
-		s[e] = nil
+		s[e] = struct{}{}
 	}
 	return s
 }
@@ -103,35 +103,35 @@ func (s Set[T]) Add(element T) bool {
 	if _, ok := s[element]; ok {
 		return false
 	}
-	s[element] = nil
+	s[element] = struct{}{}
 	return true
 }
 
 // AddMany adds the elements to the set.
 func (s Set[T]) AddMany(elements ...T) {
 	for _, e := range elements {
-		s[e] = nil
+		s[e] = struct{}{}
 	}
 }
 
 // AddSlice adds the elements of the slice to the set.
 func (s Set[T]) AddSlice(source []T) {
 	for _, e := range source {
-		s[e] = nil
+		s[e] = struct{}{}
 	}
 }
 
 // AddSeq adds the elements of the sequence to the set.
 func (s Set[T]) AddSeq(source iter.Seq[T]) {
 	for e := range source {
-		s[e] = nil
+		s[e] = struct{}{}
 	}
 }
 
 // AddSet adds the elements of the other set to the set.
 func (s Set[T]) AddSet(source Set[T]) {
 	for e := range source {
-		s[e] = nil
+		s[e] = struct{}{}
 	}
 }
 
@@ -323,7 +323,7 @@ func (s Set[T]) Filter(f func(T) bool) Set[T] {
 	res := New[T]()
 	for e := range s {
 		if f(e) {
-			res[e] = nil
+			res[e] = struct{}{}
 		}
 	}
 	return res

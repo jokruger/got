@@ -33,7 +33,7 @@ func InContainer[T any](s Container[T]) func(T) bool {
 }
 
 // InSet returns a predicate that checks if a value is in a set.
-func InSet[T comparable](s map[T]interface{}) func(T) bool {
+func InSet[T comparable](s map[T]struct{}) func(T) bool {
 	return func(v T) bool {
 		_, ok := s[v]
 		return ok

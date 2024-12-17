@@ -23,7 +23,7 @@ func MapToSlice[T any, U any](is iter.Seq[T], f func(T) U) []U {
 
 // MapUnique applies a function to each element of a sequence and returns a new sequence with unique elements only.
 func MapUnique[T any, U comparable](is iter.Seq[T], f func(T) U) iter.Seq[U] {
-	s := make(map[U]interface{})
+	s := make(map[U]struct{})
 	return func(yield func(U) bool) {
 		for i := range is {
 			u := f(i)
@@ -31,7 +31,7 @@ func MapUnique[T any, U comparable](is iter.Seq[T], f func(T) U) iter.Seq[U] {
 				if !yield(u) {
 					return
 				}
-				s[u] = nil
+				s[u] = struct{}{}
 			}
 		}
 	}
@@ -40,12 +40,12 @@ func MapUnique[T any, U comparable](is iter.Seq[T], f func(T) U) iter.Seq[U] {
 // MapUniqueToSlice applies a function to each element of a sequence and returns a new slice with unique elements only.
 func MapUniqueToSlice[T any, U comparable](is iter.Seq[T], f func(T) U) []U {
 	var r []U
-	s := make(map[U]interface{})
+	s := make(map[U]struct{})
 	for i := range is {
 		u := f(i)
 		if _, exists := s[u]; !exists {
 			r = append(r, u)
-			s[u] = nil
+			s[u] = struct{}{}
 		}
 	}
 	return r
