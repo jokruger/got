@@ -16,7 +16,10 @@ func ChunksToSeq[T any](ts []T, size int) iter.Seq[[]T] {
 		l := len(ts)
 		i := 0
 		for i < l {
-			j := min(i+size, l)
+			j := i + size
+			if j > l {
+				j = l
+			}
 			if !yield(ts[i:j]) {
 				return
 			}
