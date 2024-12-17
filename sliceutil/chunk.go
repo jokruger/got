@@ -13,12 +13,14 @@ func Chunks[T any](ts []T, size int) [][]T {
 // ChunksToSeq returns a sequence of chunks of the input slice, each of given size at most.
 func ChunksToSeq[T any](ts []T, size int) iter.Seq[[]T] {
 	return func(yield func([]T) bool) {
-		for len(ts) > 0 {
-			i := min(len(ts), size)
-			if !yield(ts[:i]) {
+		l := len(ts)
+		i := 0
+		for i < l {
+			j := min(i+size, l)
+			if !yield(ts[i:j]) {
 				return
 			}
-			ts = ts[i:]
+			i = j
 		}
 	}
 }
