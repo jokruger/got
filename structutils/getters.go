@@ -4,7 +4,7 @@ import (
 	"github.com/jokruger/got"
 )
 
-func GetID[I any, T got.IDProvider[I]](s T) I {
+func GetID[I any, T got.Identifiable[I]](s T) I {
 	return s.GetID()
 }
 
@@ -24,7 +24,7 @@ func GetAccountID[I any, T got.AccountIDProvider[I]](s T) I {
 	return s.GetAccountID()
 }
 
-func GetName[I any, T got.NameProvider[I]](s T) I {
+func GetName[I any, T got.Named[I]](s T) I {
 	return s.GetName()
 }
 
