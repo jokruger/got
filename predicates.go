@@ -11,17 +11,27 @@ func Not[T any](f func(T) bool) func(T) bool {
 	}
 }
 
-// And returns a predicate that returns true if both predicates return true.
-func And[T any](f, g func(T) bool) func(T) bool {
+// And returns a predicate that returns true if all predicates return true.
+func And[T any](preds ...func(T) bool) func(T) bool {
 	return func(v T) bool {
-		return f(v) && g(v)
+		for _, f := range preds {
+			if !f(v) {
+				return false
+			}
+		}
+		return true
 	}
 }
 
-// Or returns a predicate that returns true if either predicate returns true.
-func Or[T any](f, g func(T) bool) func(T) bool {
+// Or returns a predicate that returns true if any of the predicates return true.
+func Or[T any](preds ...func(T) bool) func(T) bool {
 	return func(v T) bool {
-		return f(v) || g(v)
+		for _, f := range preds {
+			if f(v) {
+				return true
+			}
+		}
+		return false
 	}
 }
 
