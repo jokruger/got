@@ -29,25 +29,25 @@ func TestMaps(t *testing.T) {
 		ks := make([]int, 10)
 		vs := make([]string, 10)
 
-		ks = maputil.KeysTo(m, ks[:0])
+		ks = maputil.KeysAppendTo(m, ks[:0])
 		slices.Sort(ks)
 		if len(ks) != 3 || ks[0] != 1 || ks[1] != 2 || ks[2] != 3 {
 			t.Errorf("Keys() = %v; want [1 2 3]", ks)
 		}
 
-		ks = maputil.KeysTo(m, nil)
+		ks = maputil.KeysAppendTo(m, nil)
 		slices.Sort(ks)
 		if len(ks) != 3 || ks[0] != 1 || ks[1] != 2 || ks[2] != 3 {
 			t.Errorf("Keys() = %v; want [1 2 3]", ks)
 		}
 
-		vs = maputil.ValuesTo(m, vs[:0])
+		vs = maputil.ValuesAppendTo(m, vs[:0])
 		slices.Sort(vs)
 		if len(vs) != 3 || vs[0] != "a" || vs[1] != "b" || vs[2] != "c" {
 			t.Errorf("Values() = %v; want [a b c]", vs)
 		}
 
-		vs = maputil.ValuesTo(m, nil)
+		vs = maputil.ValuesAppendTo(m, nil)
 		slices.Sort(vs)
 		if len(vs) != 3 || vs[0] != "a" || vs[1] != "b" || vs[2] != "c" {
 			t.Errorf("Values() = %v; want [a b c]", vs)
