@@ -8,7 +8,7 @@ func Values[K comparable, V any](m map[K]V) []V {
 	return values
 }
 
-func ValuesAppendTo[K comparable, V any](m map[K]V, dest []V) []V {
+func AppendValues[K comparable, V any](m map[K]V, dest []V) []V {
 	if cap(dest)-len(dest) >= len(m) {
 		for _, val := range m {
 			dest = append(dest, val)

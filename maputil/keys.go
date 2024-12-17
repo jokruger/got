@@ -8,7 +8,7 @@ func Keys[K comparable, V any](m map[K]V) []K {
 	return keys
 }
 
-func KeysAppendTo[K comparable, V any](m map[K]V, dest []K) []K {
+func AppendKeys[K comparable, V any](m map[K]V, dest []K) []K {
 	if cap(dest)-len(dest) >= len(m) {
 		for key := range m {
 			dest = append(dest, key)
