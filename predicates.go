@@ -4,6 +4,16 @@ import (
 	"iter"
 )
 
+// True returns a predicate that always returns true.
+func True[T any](T) bool {
+	return true
+}
+
+// False returns a predicate that always returns false.
+func False[T any](T) bool {
+	return false
+}
+
 // Not returns a predicate that negates the result of the given predicate.
 func Not[T any](f func(T) bool) func(T) bool {
 	return func(v T) bool {
