@@ -14,7 +14,7 @@ func TestReduce(t *testing.T) {
 		s := []int{1, 2, 3, 4, 5}
 		r := sliceutil.Reduce(s, 0, basicutil.Add)
 		if r != 15 {
-			t.Errorf("Expected 15, got %d", r)
+			t.Errorf("expected 15, got %d", r)
 		}
 	})
 
@@ -22,7 +22,7 @@ func TestReduce(t *testing.T) {
 		s := slices.Values([]int{1, 2, 3, 4, 5})
 		r := sequtil.Reduce(s, 0, basicutil.Add)
 		if r != 15 {
-			t.Errorf("Expected 15, got %d", r)
+			t.Errorf("expected 15, got %d", r)
 		}
 	})
 }

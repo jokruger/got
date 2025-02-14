@@ -17,19 +17,19 @@ func TestGoInChunks(t *testing.T) {
 			chunks = append(chunks, chunk)
 			return nil
 		}); err != nil {
-			t.Errorf("Error: %s", err.Error())
+			t.Errorf("error: %s", err.Error())
 		}
 
 		if len(chunks) != 10 {
-			t.Errorf("Expected 10 chunks, got %d", len(chunks))
+			t.Errorf("expected 10 chunks, got %d", len(chunks))
 		}
 
 		if len(chunks[0]) != 100 {
-			t.Errorf("Expected 100 items in first chunk, got %d", len(chunks[0]))
+			t.Errorf("expected 100 items in first chunk, got %d", len(chunks[0]))
 		}
 
 		if len(chunks[9]) != 99 {
-			t.Errorf("Expected 99 items in last chunk, got %d", len(chunks[9]))
+			t.Errorf("expected 99 items in last chunk, got %d", len(chunks[9]))
 		}
 
 		for _, chunk := range chunks {
@@ -37,12 +37,12 @@ func TestGoInChunks(t *testing.T) {
 		}
 
 		if len(res) != 999 {
-			t.Errorf("Expected 1000 items in all chunks, got %d", len(res))
+			t.Errorf("expected 1000 items in all chunks, got %d", len(res))
 		}
 
 		for i := 0; i < 999; i++ {
 			if res[i] != i {
-				t.Errorf("Expected %d, got %d", i, res[i])
+				t.Errorf("expected %d, got %d", i, res[i])
 			}
 		}
 	})
@@ -59,27 +59,27 @@ func TestGoInChunks(t *testing.T) {
 			sums = append(sums, sum)
 			return nil
 		}); err != nil {
-			t.Errorf("Error: %s", err.Error())
+			t.Errorf("error: %s", err.Error())
 		}
 
 		if len(sums) != 4 {
-			t.Errorf("Expected 4 sums, got %d", len(sums))
+			t.Errorf("expected 4 sums, got %d", len(sums))
 		}
 
 		if sums[0] != 3 {
-			t.Errorf("Expected 3, got %d", sums[0])
+			t.Errorf("expected 3, got %d", sums[0])
 		}
 
 		if sums[1] != 12 {
-			t.Errorf("Expected 12, got %d", sums[1])
+			t.Errorf("expected 12, got %d", sums[1])
 		}
 
 		if sums[2] != 21 {
-			t.Errorf("Expected 21, got %d", sums[2])
+			t.Errorf("expected 21, got %d", sums[2])
 		}
 
 		if sums[3] != 9 {
-			t.Errorf("Expected 9, got %d", sums[3])
+			t.Errorf("expected 9, got %d", sums[3])
 		}
 	})
 }
