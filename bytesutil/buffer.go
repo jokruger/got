@@ -11,8 +11,8 @@ type Buffer struct {
 }
 
 // NewBuffer creates a new buffer with the given byte slice.
-func NewBuffer(buf []byte, autoResize bool) *Buffer {
-	return &Buffer{buf: buf, auto: autoResize}
+func NewBuffer(buf []byte, pos int, auto bool) *Buffer {
+	return &Buffer{buf: buf, pos: pos, auto: auto}
 }
 
 // Buf returns the byte slice of buffer.
