@@ -75,9 +75,10 @@ func (s Set[T]) IsEmpty() bool {
 	return len(s) == 0
 }
 
-// Clear removes all elements from the set.
-func (s Set[T]) Clear() {
+// Clear removes all elements from the set. Modifies the set in place. Returns the set itself.
+func (s Set[T]) Clear() Set[T] {
 	clear(s)
+	return s
 }
 
 // Clone returns a copy of the set.
@@ -107,32 +108,36 @@ func (s Set[T]) Add(element T) bool {
 	return true
 }
 
-// AddMany adds the elements to the set.
-func (s Set[T]) AddMany(elements ...T) {
+// AddMany adds the elements to the set. Modifies the set in place. Returns the set itself.
+func (s Set[T]) AddMany(elements ...T) Set[T] {
 	for _, e := range elements {
 		s[e] = struct{}{}
 	}
+	return s
 }
 
-// AddSlice adds the elements of the slice to the set.
-func (s Set[T]) AddSlice(source []T) {
+// AddSlice adds the elements of the slice to the set. Modifies the set in place. Returns the set itself.
+func (s Set[T]) AddSlice(source []T) Set[T] {
 	for _, e := range source {
 		s[e] = struct{}{}
 	}
+	return s
 }
 
-// AddSeq adds the elements of the sequence to the set.
-func (s Set[T]) AddSeq(source iter.Seq[T]) {
+// AddSeq adds the elements of the sequence to the set. Modifies the set in place. Returns the set itself.
+func (s Set[T]) AddSeq(source iter.Seq[T]) Set[T] {
 	for e := range source {
 		s[e] = struct{}{}
 	}
+	return s
 }
 
-// AddSet adds the elements of the other set to the set.
-func (s Set[T]) AddSet(source Set[T]) {
+// AddSet adds the elements of the other set to the set. Modifies the set in place. Returns the set itself.
+func (s Set[T]) AddSet(source Set[T]) Set[T] {
 	for e := range source {
 		s[e] = struct{}{}
 	}
+	return s
 }
 
 // Remove removes the element from the set. Returns true if the element was removed. Returns false if the element was not in the set.
@@ -144,32 +149,36 @@ func (s Set[T]) Remove(element T) bool {
 	return true
 }
 
-// RemoveMany removes the elements from the set.
-func (s Set[T]) RemoveMany(elements ...T) {
+// RemoveMany removes the elements from the set. Modifies the set in place. Returns the set itself.
+func (s Set[T]) RemoveMany(elements ...T) Set[T] {
 	for _, e := range elements {
 		delete(s, e)
 	}
+	return s
 }
 
-// RemoveSlice removes the elements of the slice from the set.
-func (s Set[T]) RemoveSlice(source []T) {
+// RemoveSlice removes the elements of the slice from the set. Modifies the set in place. Returns the set itself.
+func (s Set[T]) RemoveSlice(source []T) Set[T] {
 	for _, e := range source {
 		delete(s, e)
 	}
+	return s
 }
 
-// RemoveSeq removes the elements of the sequence from the set.
-func (s Set[T]) RemoveSeq(source iter.Seq[T]) {
+// RemoveSeq removes the elements of the sequence from the set. Modifies the set in place. Returns the set itself.
+func (s Set[T]) RemoveSeq(source iter.Seq[T]) Set[T] {
 	for e := range source {
 		delete(s, e)
 	}
+	return s
 }
 
-// RemoveSet removes the elements of the other set from the set.
-func (s Set[T]) RemoveSet(source Set[T]) {
+// RemoveSet removes the elements of the other set from the set. Modifies the set in place. Returns the set itself.
+func (s Set[T]) RemoveSet(source Set[T]) Set[T] {
 	for e := range source {
 		delete(s, e)
 	}
+	return s
 }
 
 // Contains returns true if the set contains all elements.
