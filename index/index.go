@@ -93,3 +93,13 @@ func (idx *Index[ID, T]) Contains(id ID) bool {
 	offset := int(id - idx.minID)
 	return idx.exists[offset]
 }
+
+// ForEach iterates over all set values and applies the provided function to each value.
+func (idx *Index[ID, T]) ForEach(fn func(id ID, value T)) {
+	for i, exists := range idx.exists {
+		if exists {
+			id := idx.minID + ID(i)
+			fn(id, idx.values[i])
+		}
+	}
+}
