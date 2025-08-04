@@ -44,3 +44,13 @@ func TestFind(t *testing.T) {
 		}
 	})
 }
+
+func TestFindPtr(t *testing.T) {
+	t.Run("ints slice", func(t *testing.T) {
+		s := []int{1, 2, 3, 4, 5}
+		p := sliceutil.FindPtr(s, func(x *int) bool { return *x == 3 })
+		if p == nil || *p != 3 {
+			t.Errorf("Find() = %v; want &s[3]", p)
+		}
+	})
+}
