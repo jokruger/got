@@ -3,7 +3,7 @@ package sliceutil
 import (
 	"iter"
 
-	"github.com/jokruger/got/set"
+	"github.com/jokruger/set"
 )
 
 // Map applies a function to each element of a slice and returns a new slice.

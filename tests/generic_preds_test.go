@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/jokruger/got"
-	"github.com/jokruger/got/set"
+	"github.com/jokruger/set"
 	"github.com/jokruger/got/sliceutil"
 )
 
