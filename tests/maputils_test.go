@@ -53,4 +53,18 @@ func TestMaps(t *testing.T) {
 			t.Errorf("Values() = %v; want [a b c]", vs)
 		}
 	})
+
+	t.Run("sorted keys/values", func(t *testing.T) {
+		m := map[int]string{3: "a", 1: "b", 2: "c"}
+
+		ks := maputil.SortedKeys(m)
+		if len(ks) != 3 || ks[0] != 1 || ks[1] != 2 || ks[2] != 3 {
+			t.Errorf("SortedKeys() = %v; want [1 2 3]", ks)
+		}
+
+		vs := maputil.ValuesSortedByKeys(m)
+		if len(vs) != 3 || vs[0] != "b" || vs[1] != "c" || vs[2] != "a" {
+			t.Errorf("ValuesSortedByKeys() = %v; want [b c a]", vs)
+		}
+	})
 }

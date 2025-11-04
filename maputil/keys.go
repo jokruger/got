@@ -1,5 +1,10 @@
 package maputil
 
+import (
+	"cmp"
+	"slices"
+)
+
 func Keys[K comparable, V any](m map[K]V) []K {
 	keys := make([]K, 0, len(m))
 	for key := range m {
@@ -22,4 +27,10 @@ func AppendKeys[K comparable, V any](m map[K]V, dest []K) []K {
 		newDest = append(newDest, key)
 	}
 	return newDest
+}
+
+func SortedKeys[K cmp.Ordered, V any](m map[K]V) []K {
+	keys := Keys(m)
+	slices.Sort(keys)
+	return keys
 }
