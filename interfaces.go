@@ -30,67 +30,67 @@ type ZeroCheckable interface {
 	IsZero() bool
 }
 
-// Identifiable defines types that implements the GetID method.
+// Identifiable defines types that implements the ID method.
 type Identifiable[T any] interface {
-	GetID() T
+	ID() T
 }
 
-// ProductIDProvider defines types that implements the GetProductID method.
+// ProductIDProvider defines types that implements the ProductID method.
 type ProductIDProvider[T any] interface {
-	GetProductID() T
+	ProductID() T
 }
 
-// CustomerIDProvider defines types that implements the GetCustomerID method.
+// CustomerIDProvider defines types that implements the CustomerID method.
 type CustomerIDProvider[T any] interface {
-	GetCustomerID() T
+	CustomerID() T
 }
 
-// EventIDProvider defines types that implements the GetEventID method.
+// EventIDProvider defines types that implements the EventID method.
 type EventIDProvider[T any] interface {
-	GetEventID() T
+	EventID() T
 }
 
-// AccountIDProvider defines types that implements the GetAccountID method.
+// AccountIDProvider defines types that implements the AccountID method.
 type AccountIDProvider[T any] interface {
-	GetAccountID() T
+	AccountID() T
 }
 
-// Named defines types that implements the GetName method.
+// Named defines types that implements the Name method.
 type Named[T any] interface {
-	GetName() T
+	Name() T
 }
 
-// EventNameProvider defines types that implements the GetEventName method.
+// EventNameProvider defines types that implements the EventName method.
 type EventNameProvider[T any] interface {
-	GetEventName() T
+	EventName() T
 }
 
-// ValueTimeProvider defines types that implements the GetValueTime method.
+// ValueTimeProvider defines types that implements the ValueTime method.
 type ValueTimeProvider[T any] interface {
-	GetValueTime() T
+	ValueTime() T
 }
 
-// CreatedAtProvider defines types that implements the GetCreatedAt method.
+// CreatedAtProvider defines types that implements the CreatedAt method.
 type CreatedAtProvider[T any] interface {
-	GetCreatedAt() T
+	CreatedAt() T
 }
 
-// UpdatedAtProvider defines types that implements the GetUpdatedAt method.
+// UpdatedAtProvider defines types that implements the UpdatedAt method.
 type UpdatedAtProvider[T any] interface {
-	GetUpdatedAt() T
+	UpdatedAt() T
 }
 
-// AmountProvider defines types that implements the GetAmount method.
+// AmountProvider defines types that implements the Amount method.
 type AmountProvider[T any] interface {
-	GetAmount() T
+	Amount() T
 }
 
-// TransactionIDProvider defines types that implements the GetTransactionID method.
+// TransactionIDProvider defines types that implements the TransactionID method.
 type TransactionIDProvider[T any] interface {
-	GetTransactionID() T
+	TransactionID() T
 }
 
-// PriorityProvider defines types that implements the GetPriority method.
+// PriorityProvider defines types that implements the Priority method.
 type PriorityProvider[T any] interface {
-	GetPriority() T
+	Priority() T
 }

@@ -4,54 +4,54 @@ import (
 	"github.com/jokruger/got"
 )
 
-func GetID[I any, T got.Identifiable[I]](s T) I {
-	return s.GetID()
+func ID[I any, T got.Identifiable[I]](s T) I {
+	return s.ID()
 }
 
-func GetProductID[I any, T got.ProductIDProvider[I]](s T) I {
-	return s.GetProductID()
+func ProductID[I any, T got.ProductIDProvider[I]](s T) I {
+	return s.ProductID()
 }
 
-func GetCustomerID[I any, T got.CustomerIDProvider[I]](s T) I {
-	return s.GetCustomerID()
+func CustomerID[I any, T got.CustomerIDProvider[I]](s T) I {
+	return s.CustomerID()
 }
 
-func GetEventID[I any, T got.EventIDProvider[I]](s T) I {
-	return s.GetEventID()
+func EventID[I any, T got.EventIDProvider[I]](s T) I {
+	return s.EventID()
 }
 
-func GetAccountID[I any, T got.AccountIDProvider[I]](s T) I {
-	return s.GetAccountID()
+func AccountID[I any, T got.AccountIDProvider[I]](s T) I {
+	return s.AccountID()
 }
 
-func GetName[I any, T got.Named[I]](s T) I {
-	return s.GetName()
+func Name[I any, T got.Named[I]](s T) I {
+	return s.Name()
 }
 
-func GetEventName[I any, T got.EventNameProvider[I]](s T) I {
-	return s.GetEventName()
+func EventName[I any, T got.EventNameProvider[I]](s T) I {
+	return s.EventName()
 }
 
-func GetValueTime[I any, T got.ValueTimeProvider[I]](s T) I {
-	return s.GetValueTime()
+func ValueTime[I any, T got.ValueTimeProvider[I]](s T) I {
+	return s.ValueTime()
 }
 
-func GetCreatedAt[I any, T got.CreatedAtProvider[I]](s T) I {
-	return s.GetCreatedAt()
+func CreatedAt[I any, T got.CreatedAtProvider[I]](s T) I {
+	return s.CreatedAt()
 }
 
-func GetUpdatedAt[I any, T got.UpdatedAtProvider[I]](s T) I {
-	return s.GetUpdatedAt()
+func UpdatedAt[I any, T got.UpdatedAtProvider[I]](s T) I {
+	return s.UpdatedAt()
 }
 
-func GetAmount[I any, T got.AmountProvider[I]](s T) I {
-	return s.GetAmount()
+func Amount[I any, T got.AmountProvider[I]](s T) I {
+	return s.Amount()
 }
 
-func GetTransactionID[I any, T got.TransactionIDProvider[I]](s T) I {
-	return s.GetTransactionID()
+func TransactionID[I any, T got.TransactionIDProvider[I]](s T) I {
+	return s.TransactionID()
 }
 
-func GetPriority[I any, T got.PriorityProvider[I]](s T) I {
-	return s.GetPriority()
+func Priority[I any, T got.PriorityProvider[I]](s T) I {
+	return s.Priority()
 }

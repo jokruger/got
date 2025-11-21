@@ -8,27 +8,27 @@ import (
 )
 
 type TestGettersStruct struct {
-	ID   int
-	Name string
+	id   int
+	name string
 }
 
-func (t TestGettersStruct) GetID() int {
-	return t.ID
+func (t TestGettersStruct) ID() int {
+	return t.id
 }
 
-func (t TestGettersStruct) GetName() string {
-	return t.Name
+func (t TestGettersStruct) Name() string {
+	return t.name
 }
 
 func TestGetters(t *testing.T) {
 	ms := []TestGettersStruct{
-		{ID: 1, Name: "One"},
-		{ID: 2, Name: "Two"},
-		{ID: 3, Name: "Three"},
+		{id: 1, name: "One"},
+		{id: 2, name: "Two"},
+		{id: 3, name: "Three"},
 	}
 
 	t.Run("get id", func(t *testing.T) {
-		ids := sliceutil.Map(ms, structutil.GetID)
+		ids := sliceutil.Map(ms, structutil.ID)
 		if len(ids) != 3 {
 			t.Fatalf("expected 3 ids, got %d", len(ids))
 		}
@@ -38,7 +38,7 @@ func TestGetters(t *testing.T) {
 	})
 
 	t.Run("get name", func(t *testing.T) {
-		names := sliceutil.Map(ms, structutil.GetName)
+		names := sliceutil.Map(ms, structutil.Name)
 		if len(names) != 3 {
 			t.Fatalf("expected 3 names, got %d", len(names))
 		}
